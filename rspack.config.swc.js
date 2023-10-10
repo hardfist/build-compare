@@ -25,7 +25,6 @@ module.exports = {
 									},
 									transform: {
 										react: {
-											runtime: "automatic",
 											development: !isProd,
 											refresh: !isProd,
 										}
@@ -77,6 +76,5 @@ module.exports = {
 		warnings: false,
 	},
 	optimization: {
-	},
-	module: {},
+	}
 };
