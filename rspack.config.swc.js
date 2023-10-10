@@ -5,33 +5,59 @@ module.exports = {
 	mode: isProd ? "production" : "development",
 	experiments: {
 		rspackFuture: {
-			disableTransformByDefault:true
+			disableTransformByDefault: true
 		}
 	},
 	module: {
 		rules: [
 			{
-				test: /\.(js|jsx|ts|tsx)$/,
-				use: {
-					loader: "builtin:swc-loader",
-					options: {
-						sourceMap: true,
-						jsc: {
-							parser: {
-								syntax: "typescript",
-								tsx: true
-							},
-							transform: {
-								react: {
-									runtime: "automatic",
-									development: !isProd,
-									refresh: !isProd,
+				oneOf: [
+					{
+						test: /\.(js|jsx)$/,
+						use: {
+							loader: "builtin:swc-loader",
+							options: {
+								sourceMap: true,
+								jsc: {
+									parser: {
+										syntax: "ecmascript",
+										jsx: true
+									},
+									transform: {
+										react: {
+											runtime: "automatic",
+											development: !isProd,
+											refresh: !isProd,
+										}
+									}
+								}
+							}
+						}
+					},
+					{
+						test: /\.ts$/,
+						use: {
+							loader: "builtin:swc-loader",
+							options: {
+								sourceMap: true,
+								jsc: {
+									parser: {
+										syntax: "typescript",
+									},
+									transform: {
+										react: {
+											runtime: "automatic",
+											development: !isProd,
+											refresh: !isProd,
+										}
+									}
 								}
 							}
 						}
 					}
-				}
+				]
 			}
+
 		]
 	},
 	resolve: {

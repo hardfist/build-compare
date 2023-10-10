@@ -88,6 +88,6 @@ import * as copy10 from "./copy10/Three.js";
 export { copy10 };
 
 // rome
-import "./rome.ts";
+// import "./rome.ts";
 
 console.log("Hello World");
